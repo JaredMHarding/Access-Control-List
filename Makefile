@@ -1,10 +1,17 @@
 CFLAGS=-c -std=gnu99 -Wall -pedantic
 
-decode: decode.o
-	gcc -g decode.o -o decode
+main: get.o put.o validACL.o
+	gcc -g get.o validACL.o -o get
+	gcc -g put.o validACL.o -o put
 
-decode.o: decode.c
-	gcc $(CFLAGS) decode.c
+get.o: get.c validACL.h
+	gcc $(CFLAGS) get.c
+
+put.o: put.c validACL.h
+	gcc $(CFLAGS) put.c
+
+validACL.o: validACL.c validACL.h
+	gcc $(CFLAGS) validACL.c
 
 clean:
-	rm -f decode *.exe *.o
+	rm -f get put *.exe *.o
